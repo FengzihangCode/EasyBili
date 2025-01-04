@@ -2,11 +2,12 @@ import XCTest
 @testable import EasyBili
 
 final class EasyBiliTests: XCTestCase {
-    func testExample() throws {
-        // XCTest Documentation
-        // https://developer.apple.com/documentation/xctest
-
-        // Defining Test Cases and Test Methods
-        // https://developer.apple.com/documentation/xctest/defining_test_cases_and_test_methods
+    func testFetchPopularVideos() {
+        let expectation = self.expectation(description: "Fetch Videos")
+        EasyBili.shared.fetchPopularVideos { videos in
+            XCTAssertFalse(videos.isEmpty, "Videos should not be empty")
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 5.0)
     }
 }
